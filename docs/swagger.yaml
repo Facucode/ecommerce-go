@@ -1,0 +1,70 @@
+basePath: /api
+definitions:
+  domain.Product:
+    properties:
+      category:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      price:
+        type: number
+      stock:
+        type: integer
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API for ecommerce
+  title: Ecommerce API
+  version: "0.1"
+paths:
+  /products:
+    get:
+      consumes:
+      - application/json
+      description: This endpoint gets all the products
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/domain.Product'
+            type: array
+      security:
+      - Bearer: []
+      summary: Obtain all products
+      tags:
+      - example
+    post:
+      consumes:
+      - application/json
+      description: Endpoint for loading a new product
+      parameters:
+      - description: Product data
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/domain.Product'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      security:
+      - Bearer: []
+      summary: Create a product
+      tags:
+      - example
+securityDefinitions:
+  Bearer:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
